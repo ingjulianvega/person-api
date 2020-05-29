@@ -34,11 +34,9 @@ public class PersonDto {
     @NotNull
     private GenderEnum gender;
     @NotNull
-    @NotBlank
     @Positive
     private double height;
     @NotNull
-    @NotBlank
     @Positive
     private double weight;
 }

@@ -40,6 +40,8 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public PersonDto saveNewPerson(PersonDto personDto) {
+        personRepository.save(personMapper.personDtoToPerson(personDto));
+
         return PersonDto
                 .builder()
                 .id(UUID.randomUUID())
