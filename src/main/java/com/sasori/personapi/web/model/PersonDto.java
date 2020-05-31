@@ -12,6 +12,8 @@ import javax.validation.constraints.Positive;
 import java.sql.Timestamp;
 import java.util.UUID;
 
+import static com.sasori.personapi.configuration.ErrorCodeMessages.*;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,18 +27,14 @@ public class PersonDto {
     private Timestamp createdDate;
     @Null
     private Timestamp lastModifiedDate;
-    @NotNull
-    @NotBlank
+    @NotBlank(message = VALIDATION_NAME_NULL)
     private String name;
-    @NotNull
-    @NotBlank
+    @NotBlank(message = VALIDATION_LASTNAME_NULL)
     private String lastName;
-    @NotNull
+    @NotNull(message = VALIDATION_GENDER_NULL)
     private GenderEnum gender;
-    @NotNull
-    @Positive
+    @Positive(message = VALIDATION_HEIGHT_POSITIVE)
     private double height;
-    @NotNull
-    @Positive
+    @Positive(message = VALIDATION_WEIGHT_POSITIVE)
     private double weight;
 }

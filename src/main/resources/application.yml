@@ -7,7 +7,6 @@ server:
   servlet:
     context-path: /api/v1/person
 # Data source configuration
-
 spring:
   application:
     name: person-api
@@ -35,9 +34,9 @@ swagger:
     title: Person API
     version: '@project.version@'
     description: Base service for an API
-positive-validation:
+person:
   success: The operation was successful.
-  prefix: 'BFF-POV:'
+  prefix: 'API-PSN:'
   channel-id: ${mercury.channel.id}
   error:
     general: There was an unexpected error. Please try again.
