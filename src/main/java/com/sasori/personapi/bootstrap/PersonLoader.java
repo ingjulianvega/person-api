@@ -23,6 +23,10 @@ public class PersonLoader implements CommandLineRunner {
 
     private final PersonRepository personRepository;
 
+    public PersonLoader(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
+
     @Override
     public void run(String... args) throws Exception {
 
