@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Component;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -14,6 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,14 +27,15 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @Setter
 @Component
 @EnableSwagger2
+@Import(BeanValidatorPluginsConfiguration.class)
 @ConfigurationProperties(prefix = "swagger")
 public class SpringFoxConfig {
 
     private static final String API_KEY = "Token";
     private static final String HEADER = "header";
     private static final String AUTHORIZATION = "Authorization";
-    private static final String URL = "https://www.globant.com/";
-    private static final String EMAIL = "edwin.silva@globant.com";
+    private static final String URL = "https://www.ingjulianvega.com/";
+    private static final String EMAIL = "ingjulianega@gmail.com";
 
     private boolean allowed;
     private Api api;
@@ -49,17 +52,12 @@ public class SpringFoxConfig {
                 .useDefaultResponseMessages(true)
                 .enable(allowed);
     }
-   /* @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.sasori"))
-                .paths(PathSelectors.any())
-                .build();
-    }*/
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title(api.getTitle()).description(api.getDescription()).version(api.getVersion())
+        return new ApiInfoBuilder()
+                .title(api.getTitle())
+                .description(api.getDescription())
+                .version(api.getVersion())
                 .contact(new Contact(EMPTY, URL, EMAIL)).build();
     }
 
@@ -68,7 +66,10 @@ public class SpringFoxConfig {
     }
 
     private SecurityContext securityContext() {
-        return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(regex("/*"))
+        return SecurityContext
+                .builder()
+                .securityReferences(defaultAuth())
+                .forPaths(regex("/*"))
                 .build();
     }
 

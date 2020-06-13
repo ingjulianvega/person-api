@@ -35,6 +35,7 @@ public class ErrorMessageResolver {
 
     private final PersonParameters parameter;
 
+
     public ApiError resolveApiException(final String response) {
         ApiError apiError;
         try {
