@@ -1,6 +1,9 @@
+#logging:
+  #level:
+    #root: DEBUG
 #Application http://localhost:8081/api/v1/person/swagger-ui.html#/persons
 application:
-  name: person-apipositive-validation-bff
+  name: person-api
 #General configuration
 server:
   port: 8081

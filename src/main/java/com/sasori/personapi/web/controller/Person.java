@@ -31,7 +31,7 @@ public interface Person {
             @ApiResponse(code = 400, message = "Bad request", response = ApiError.class)
     })
     @PostMapping
-    ResponseEntity handlePost(@NotNull @Valid @RequestBody PersonDto PersonDto);
+    ResponseEntity saveNewPerson(@NotNull @Valid @RequestBody PersonDto PersonDto);
 
     @ApiOperation(value = "Update a person", nickname = "update-person")
     @ApiResponses({
@@ -39,7 +39,7 @@ public interface Person {
             @ApiResponse(code = 400, message = "Bad request", response = ApiError.class)
     })
     @PutMapping({"/{personId}"})
-    ResponseEntity handleUpdate(@NotNull @PathVariable("personId") UUID personId,
+    ResponseEntity updatePerson(@NotNull @PathVariable("personId") UUID personId,
                                 @NotNull @Valid @RequestBody PersonDto PersonDto);
 
     @ApiOperation(value = "Delete a person", nickname = "delete-person")
@@ -48,6 +48,5 @@ public interface Person {
             @ApiResponse(code = 400, message = "Bad request", response = ApiError.class)
     })
     @DeleteMapping({"/{personId}"})
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    void deletePerson(@NotNull @PathVariable("personId") UUID personId);
+    ResponseEntity deletePerson(@NotNull @PathVariable("personId") UUID personId);
 }

@@ -9,7 +9,7 @@ public interface PersonService {
 
     PersonDto saveNewPerson(PersonDto personDto);
 
-    void updatePerson(UUID personId, PersonDto personDto);
+    PersonDto updatePerson(UUID personId, PersonDto personDto);
 
     void deletePerson(UUID personId);
 }
