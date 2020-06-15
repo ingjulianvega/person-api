@@ -1,8 +1,9 @@
 package com.sasori.personapi.services;
 
+import com.sasori.personapi.configuration.ErrorCodeMessages;
 import com.sasori.personapi.domain.Person;
 import com.sasori.personapi.domain.repositories.PersonRepository;
-import com.sasori.personapi.web.controller.NotFoundException;
+import com.sasori.personapi.exception.PersonException;
 import com.sasori.personapi.web.mappers.PersonMapper;
 import com.sasori.personapi.web.model.PersonDto;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,7 @@ public class PersonServiceImpl implements PersonService {
     public PersonDto getPersonById(UUID personId) {
         log.debug("getting a person...");
         return personMapper.personToPersonDto(
-                personRepository.findById(personId).orElseThrow(NotFoundException::new));
+                personRepository.findById(personId).orElseThrow(() -> new PersonException(ErrorCodeMessages.PERSON_NOT_FOUND,"")));
     }
 
     @Override
@@ -35,7 +36,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public PersonDto updatePerson(UUID personId, PersonDto personDto) {
         log.debug("Updating a person...");
-        Person person = personRepository.findById(personId).orElseThrow(NotFoundException::new);
+        Person person = personRepository.findById(personId).orElseThrow(() -> new PersonException(ErrorCodeMessages.PERSON_NOT_FOUND,"Not Found"));
         person.setName(personDto.getName());
         person.setLastName(personDto.getLastName());
         person.setGender(personDto.getGender().toString());
